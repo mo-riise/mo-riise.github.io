@@ -1,22 +1,23 @@
-# mo-riise.github.io
+# MO Research Suite — GitHub Pages
 
-Personal GitHub Pages site, served at **https://mo-riise.github.io**.
+## Files in this folder
 
-## Structure
-
-- `index.html` — page markup
-- `style.css` — styling
-
-## Local preview
-
-Open `index.html` directly in a browser, or serve the folder:
-
-```bash
-python -m http.server 8000
-# then visit http://localhost:8000
+```
+index.html        ← main page (upload this)
+images/
+  slide1.jpg      ← Research Home screenshot
+  slide2.jpg      ← Research Assistant welcome screen
+  slide3.jpg      ← Query processing screen
+  slide4.jpg      ← HDFC Bank response screen
 ```
 
-## Deploying
+## How to upload
 
-This is a GitHub user site. Pushing to the `main` branch publishes
-automatically — no build step or Pages configuration required.
+1. Go to your GitHub repo
+2. Click **Add file → Upload files**
+3. Upload `index.html`
+4. Create an `images/` folder and upload all 4 screenshots with exact filenames above
+5. Commit — site goes live in ~2 minutes
+
+## Your URL
+`https://yourusername.github.io/research-suite`
