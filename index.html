@@ -269,6 +269,7 @@
     section { padding: clamp(3.5rem, 8vw, 6rem) 2rem; }
     section.alt { background: var(--bg-alt); }
     .container { max-width: 980px; margin: 0 auto; }
+    .container.wide { max-width: 1160px; }
     .section-label {
       font-size: 0.75rem; font-weight: 700;
       letter-spacing: 0.12em; text-transform: uppercase;
@@ -292,6 +293,36 @@
     }
     .reveal.in h2::after { transform: scaleX(1); }
     p.lead { font-size: clamp(1rem, 1.6vw, 1.08rem); color: var(--muted); max-width: 700px; margin-bottom: 1.5rem; }
+    #about p.lead { text-align: justify; max-width: 100%; }
+
+    /* THE PROBLEM — fluid narrative */
+    .problem-flow { display: grid; gap: 1.6rem; margin-top: 1.9rem; max-width: 1080px; }
+    .problem-flow strong { color: var(--purple); font-weight: 600; }
+    .problem-punch {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.4rem, 2.8vw, 2rem);
+      font-weight: 600; line-height: 1.25; letter-spacing: -0.01em;
+      color: var(--text); margin: 0.4rem 0;
+    }
+    .problem-punch .hl {
+      background: linear-gradient(120deg, var(--purple), var(--purple-light));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .solution-box {
+      position: relative;
+      padding: 1.5rem 1.75rem 1.5rem 2.1rem;
+      background: linear-gradient(180deg, #ffffff, #fcfbff);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    }
+    .solution-box::before {
+      content: ""; position: absolute; left: 0; top: 1.1rem; bottom: 1.1rem; width: 3px;
+      border-radius: 2px; background: linear-gradient(180deg, var(--purple), var(--purple-light));
+    }
+    .solution-box:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); }
+    .solution-box p { margin: 0; text-align: justify; color: var(--text); }
 
     /* TWO COL */
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
@@ -318,6 +349,69 @@
     }
     .phone-wrap:hover img { animation-play-state: paused; transform: translateY(-8px) rotate(-1deg); box-shadow: 0 32px 64px -16px rgba(91,33,182,0.28); }
 
+    /* DUAL-PHONE FAN SHOWCASE */
+    .phone-duo {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      min-height: clamp(370px, 42vw, 500px);
+    }
+    .phone-duo::before {
+      content: ""; position: absolute; z-index: 0;
+      width: 72%; height: 70%;
+      background: radial-gradient(circle, rgba(124,58,237,0.20), transparent 70%);
+      filter: blur(34px);
+    }
+    .phone-duo .ph {
+      position: absolute;
+      width: 60%; max-width: 215px;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+    }
+    .phone-duo .ph-back  { z-index: 1; filter: brightness(0.97); transform: translate(-32%, 0) rotate(-7deg) scale(0.9); animation: floatBack 7s ease-in-out infinite; }
+    .phone-duo .ph-front { z-index: 2; transform: translate(30%, 8px) rotate(6deg); animation: floatFront 6s ease-in-out infinite; }
+    @keyframes floatBack {
+      0%, 100% { transform: translate(-32%, 0) rotate(-7deg) scale(0.9); }
+      50%      { transform: translate(-32%, -16px) rotate(-7deg) scale(0.9); }
+    }
+    @keyframes floatFront {
+      0%, 100% { transform: translate(30%, 8px) rotate(6deg); }
+      50%      { transform: translate(30%, -10px) rotate(6deg); }
+    }
+    .phone-duo:hover .ph { animation-play-state: paused; }
+    .phone-duo:hover .ph-back  { transform: translate(-44%, -6px) rotate(-10deg) scale(0.9); box-shadow: 0 32px 64px -16px rgba(91,33,182,0.30); }
+    .phone-duo:hover .ph-front { transform: translate(42%, -6px) rotate(9deg); box-shadow: 0 32px 64px -16px rgba(91,33,182,0.30); }
+
+    /* TRIO-PHONE FAN SHOWCASE */
+    .phone-trio {
+      position: relative;
+      display: flex; align-items: center; justify-content: center;
+      min-height: clamp(380px, 44vw, 520px);
+      animation: float 7s ease-in-out infinite;
+    }
+    .phone-trio::before {
+      content: ""; position: absolute; z-index: 0;
+      width: 80%; height: 70%;
+      background: radial-gradient(circle, rgba(124,58,237,0.20), transparent 70%);
+      filter: blur(36px);
+    }
+    .phone-trio .ph {
+      position: absolute;
+      width: 54%; max-width: 200px;
+      border-radius: 26px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-lg);
+      transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
+    }
+    .phone-trio .ph-left   { z-index: 1; filter: brightness(0.95); transform: translate(-46%, 12px) rotate(-11deg) scale(0.84); }
+    .phone-trio .ph-right  { z-index: 1; filter: brightness(0.95); transform: translate(46%, 12px) rotate(11deg) scale(0.84); }
+    .phone-trio .ph-center { z-index: 2; transform: translateY(-4px); }
+    .phone-trio:hover { animation-play-state: paused; }
+    .phone-trio:hover .ph-left   { transform: translate(-60%, 8px) rotate(-14deg) scale(0.84); box-shadow: 0 32px 64px -16px rgba(91,33,182,0.30); }
+    .phone-trio:hover .ph-right  { transform: translate(60%, 8px) rotate(14deg) scale(0.84); box-shadow: 0 32px 64px -16px rgba(91,33,182,0.30); }
+    .phone-trio:hover .ph-center { transform: translateY(-12px) scale(1.03); box-shadow: 0 36px 70px -16px rgba(91,33,182,0.34); }
+
     /* BULLETS */
     ul.feature-list { list-style: none; padding: 0; margin-top: 1.5rem; }
     ul.feature-list li {
@@ -333,29 +427,44 @@
     /* METRICS */
     .metrics-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem; margin-top: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: clamp(1.35rem, 2.6vw, 2.4rem);
+      margin-top: 3rem;
     }
+    /* per-card accent palette */
+    .metric-card { --c1: #7C3AED; --c2: #A78BFA; }
+    .metric-card:nth-child(1) { --c1: #7C3AED; --c2: #C4B5FD; }
+    .metric-card:nth-child(2) { --c1: #2563EB; --c2: #93C5FD; }
+    .metric-card:nth-child(3) { --c1: #0891B2; --c2: #67E8F9; }
+    .metric-card:nth-child(4) { --c1: #16A34A; --c2: #86EFAC; }
+    .metric-card:nth-child(5) { --c1: #DB2777; --c2: #F9A8D4; }
+    .metric-card:nth-child(6) { --c1: #EA580C; --c2: #FDBA74; }
+    .metric-card:nth-child(7) { --c1: #9333EA; --c2: #D8B4FE; }
     .metric-card {
       position: relative;
       border: 1px solid var(--border);
-      border-radius: 14px; padding: 1.6rem; background: white;
+      border-radius: 18px;
+      padding: clamp(1.6rem, 2.4vw, 2.2rem);
+      background:
+        linear-gradient(90deg, var(--c1), var(--c2)) top / 100% 4px no-repeat,
+        linear-gradient(180deg, #ffffff, #fcfbff);
       box-shadow: var(--shadow-sm);
+      overflow: hidden;
       transform-style: preserve-3d;
-      transition: transform 0.2s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
+      transition: transform 0.25s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
     }
-    /* cursor-following spotlight glow */
+    /* accent spotlight following the cursor */
     .metric-card::before {
-      content: ""; position: absolute; inset: 0; border-radius: 14px;
-      background: radial-gradient(220px circle at var(--mx, 50%) var(--my, 50%), rgba(124,58,237,0.12), transparent 60%);
-      opacity: 0; transition: opacity 0.3s var(--ease);
-      pointer-events: none;
+      content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+      background: radial-gradient(260px circle at var(--mx, 50%) var(--my, 50%),
+                  color-mix(in srgb, var(--c1) 22%, transparent), transparent 60%);
+      opacity: 0; transition: opacity 0.35s var(--ease);
     }
     .metric-card:hover::before { opacity: 1; }
-    /* rotating conic aurora border on hover */
+    /* rotating conic accent border on hover */
     .metric-card::after {
-      content: ""; position: absolute; inset: 0; border-radius: 14px; padding: 1.5px;
-      background: conic-gradient(from var(--angle), transparent 0%, var(--purple-light) 12%, var(--purple-soft) 22%, transparent 35%);
+      content: ""; position: absolute; inset: 0; border-radius: inherit; padding: 1.5px;
+      background: conic-gradient(from var(--angle), transparent 0%, var(--c1) 10%, var(--c2) 20%, transparent 32%);
       -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
       -webkit-mask-composite: xor; mask-composite: exclude;
       opacity: 0; transition: opacity 0.4s var(--ease);
@@ -365,15 +474,17 @@
     @keyframes spinBorder { to { --angle: 360deg; } }
     .metric-card:hover {
       border-color: transparent;
-      box-shadow: var(--shadow-lg), 0 0 24px rgba(124,58,237,0.18);
+      box-shadow: var(--shadow-lg), 0 0 36px color-mix(in srgb, var(--c1) 28%, transparent);
     }
     .metric-card > * { position: relative; z-index: 1; }
     .metric-card .val {
       font-family: 'Fraunces', serif;
-      font-size: 1.85rem; font-weight: 700; color: var(--purple); letter-spacing: -0.01em;
+      font-size: clamp(1.95rem, 3vw, 2.4rem); font-weight: 700; letter-spacing: -0.01em;
+      background: linear-gradient(120deg, var(--c1), var(--c2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      filter: drop-shadow(0 2px 12px color-mix(in srgb, var(--c1) 26%, transparent));
     }
-    .metric-card .val.green { color: var(--green); }
-    .metric-card .desc { font-size: 0.85rem; color: var(--muted); margin-top: 0.35rem; line-height: 1.5; }
+    .metric-card .desc { font-size: 0.88rem; color: var(--muted); margin-top: 0.6rem; line-height: 1.55; }
 
     /* VALIDATION */
     .validation-grid {
@@ -392,6 +503,136 @@
     .val-card h4 { font-size: 0.92rem; font-weight: 700; margin-bottom: 0.5rem; }
     .val-card p { font-size: 0.85rem; color: var(--muted); line-height: 1.5; }
 
+    /* TESTIMONIAL QUOTE CARDS */
+    .quote-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.75rem; margin-top: 2.75rem;
+    }
+    .quote-card {
+      --c1: #7C3AED; --c2: #A78BFA;
+      position: relative;
+      padding: 2.5rem 1.8rem 1.6rem;
+      background: linear-gradient(180deg, #ffffff, #fcfbff);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease);
+    }
+    .quote-card:nth-child(1) { --c1: #7C3AED; --c2: #C4B5FD; }
+    .quote-card:nth-child(2) { --c1: #0891B2; --c2: #67E8F9; }
+    .quote-card:nth-child(3) { --c1: #DB2777; --c2: #F9A8D4; }
+    .quote-card::before {
+      content: "\201C";
+      position: absolute; top: -0.55rem; left: 1rem;
+      font-family: 'Fraunces', serif; font-weight: 800;
+      font-size: 5.5rem; line-height: 1;
+      background: linear-gradient(120deg, var(--c1), var(--c2));
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      opacity: 0.35; transition: transform 0.45s var(--ease), opacity 0.45s var(--ease);
+    }
+    .quote-card:hover {
+      transform: translateY(-8px);
+      border-color: transparent;
+      box-shadow: var(--shadow-lg), 0 0 34px color-mix(in srgb, var(--c1) 24%, transparent);
+    }
+    .quote-card:hover::before { transform: scale(1.15) rotate(-4deg); opacity: 0.5; }
+    .quote-card p { font-size: 0.92rem; color: var(--text); line-height: 1.6; font-style: italic; }
+    .quote-card .firm {
+      display: flex; align-items: center; gap: 0.6rem;
+      margin-top: 1.25rem; padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      font-size: 0.85rem; font-weight: 700; color: var(--text);
+    }
+    .quote-card .firm::before {
+      content: ""; width: 26px; height: 3px; border-radius: 2px;
+      background: linear-gradient(90deg, var(--c1), var(--c2));
+    }
+
+    /* GOVERNANCE — numbered chain */
+    .gov-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem; margin-top: 2.75rem;
+      counter-reset: gov;
+    }
+    .gov-card {
+      position: relative; counter-increment: gov;
+      padding: 1.9rem 1.6rem 1.6rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease);
+    }
+    .gov-card::before {
+      content: counter(gov, decimal-leading-zero);
+      position: absolute; top: 0.4rem; right: 0.9rem;
+      font-family: 'Fraunces', serif; font-weight: 800;
+      font-size: 3.2rem; line-height: 1;
+      color: var(--purple); opacity: 0.10;
+      transition: opacity 0.4s var(--ease), transform 0.4s var(--ease);
+    }
+    .gov-card::after {
+      content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+      width: 3px; background: linear-gradient(180deg, var(--purple), var(--purple-light));
+      transform: scaleY(0.18); transform-origin: top;
+      transition: transform 0.45s var(--ease);
+    }
+    .gov-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .gov-card:hover::before { opacity: 0.20; transform: translateY(-2px); }
+    .gov-card:hover::after { transform: scaleY(1); }
+    .gov-card h4 { font-size: 0.95rem; font-weight: 700; margin-bottom: 0.55rem; position: relative; z-index: 1; }
+    .gov-card p { font-size: 0.86rem; color: var(--muted); line-height: 1.55; position: relative; z-index: 1; }
+
+    /* COMPLIANCE — accordion grid */
+    .accordion {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(420px, 1fr));
+      gap: 1rem 1.5rem; margin-top: 2.5rem;
+    }
+    .acc-item {
+      border: 1px solid var(--border);
+      border-radius: 12px; background: white;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    }
+    .acc-item.open { border-color: var(--purple-soft); box-shadow: var(--shadow-md); }
+    .acc-head {
+      display: flex; align-items: center; gap: 1rem; width: 100%;
+      padding: 1.05rem 1.3rem;
+      background: none; border: none; cursor: pointer; text-align: left;
+      font-family: 'Inter', sans-serif; font-size: 0.95rem; font-weight: 600; color: var(--text);
+    }
+    .acc-head .acc-num {
+      flex-shrink: 0; font-family: 'Fraunces', serif; font-weight: 700;
+      font-size: 0.85rem; color: var(--purple); width: 26px;
+    }
+    .acc-head .acc-title { flex: 1; }
+    .acc-head .acc-icon {
+      flex-shrink: 0; position: relative; width: 16px; height: 16px;
+      transition: transform 0.4s var(--ease);
+    }
+    .acc-head .acc-icon::before, .acc-head .acc-icon::after {
+      content: ""; position: absolute; background: var(--purple); border-radius: 2px;
+      transition: opacity 0.3s var(--ease);
+    }
+    .acc-head .acc-icon::before { top: 7px; left: 0; width: 16px; height: 2px; }
+    .acc-head .acc-icon::after  { top: 0; left: 7px; width: 2px; height: 16px; }
+    .acc-item.open .acc-icon { transform: rotate(180deg); }
+    .acc-item.open .acc-icon::after { opacity: 0; }
+    .acc-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.45s var(--ease); }
+    .acc-item.open .acc-panel { grid-template-rows: 1fr; }
+    .acc-inner { overflow: hidden; }
+    .acc-panel p {
+      padding: 0 1.3rem 1.15rem 3.3rem;
+      font-size: 0.88rem; color: var(--muted); line-height: 1.55;
+    }
+    @media (max-width: 760px) { .accordion { grid-template-columns: 1fr; } }
+
     /* SCREENSHOTS */
     .screenshots {
       display: grid;
@@ -399,15 +640,53 @@
       gap: 1.5rem; margin-top: 2.5rem;
     }
     .screenshots img {
+      position: relative;
       width: 100%; border-radius: 18px;
       border: 1px solid var(--border);
       box-shadow: var(--shadow-md);
-      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), clip-path 0.9s var(--ease);
+      cursor: zoom-in;
+      transition: transform 0.4s var(--ease), box-shadow 0.4s var(--ease), border-color 0.4s var(--ease), clip-path 0.9s var(--ease);
     }
     /* curtain wipe for screenshots */
     .screenshots img { clip-path: inset(0 0 100% 0); }
     .reveal.in .screenshots img { clip-path: inset(0 0 0 0); }
-    .screenshots img:hover { transform: translateY(-6px) scale(1.02); box-shadow: var(--shadow-lg); }
+    /* beat [data-stagger] > * transform reset after reveal */
+    .reveal.in .screenshots > img:hover {
+      transform: translateY(-10px) scale(1.05);
+      box-shadow: var(--shadow-lg), 0 0 42px rgba(124, 58, 237, 0.32);
+      border-color: var(--purple-soft);
+      z-index: 2;
+    }
+    .reveal.in .screenshots > img:active { transform: translateY(-3px) scale(1.0); }
+
+    /* LIGHTBOX (click to zoom) */
+    #lightbox {
+      position: fixed; inset: 0; z-index: 10001;
+      display: flex; align-items: center; justify-content: center;
+      padding: 5vw;
+      background: rgba(10, 10, 22, 0.86);
+      backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px);
+      opacity: 0; visibility: hidden; cursor: zoom-out;
+      transition: opacity 0.35s var(--ease), visibility 0.35s var(--ease);
+    }
+    #lightbox.open { opacity: 1; visibility: visible; }
+    #lightbox img {
+      max-width: 92vw; max-height: 88vh;
+      border-radius: 18px;
+      box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
+      transform: scale(0.9); transition: transform 0.4s var(--ease);
+    }
+    #lightbox.open img { transform: scale(1); }
+    #lightbox .lb-close {
+      position: absolute; top: 1.3rem; right: 1.5rem;
+      width: 44px; height: 44px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; line-height: 1; color: #fff;
+      background: rgba(255, 255, 255, 0.10);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      cursor: pointer; transition: background 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+    #lightbox .lb-close:hover { background: rgba(255, 255, 255, 0.22); transform: rotate(90deg); }
 
     hr { border: none; border-top: 1px solid var(--border); }
 
@@ -429,7 +708,7 @@
     .reveal.in { opacity: 1; transform: none; }
     /* stagger children (data-stagger sits inside a .reveal container) */
     [data-stagger] > * {
-      opacity: 0; transform: translateY(20px);
+      opacity: 0; transform: translateY(26px) scale(0.96);
       transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
     }
     .reveal.in [data-stagger] > * { opacity: 1; transform: none; }
@@ -437,7 +716,8 @@
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       .hero::before, .hero h1, .phone-wrap img, nav .badge::before,
-      .hero .eyebrow::before, .metric-card:hover::after { animation: none !important; }
+      .hero .eyebrow::before, .metric-card:hover::after,
+      .phone-duo .ph, .phone-trio { animation: none !important; }
       .hero h1 .word { opacity: 1 !important; transform: none !important; animation: none !important; }
       .reveal, [data-stagger] > * { opacity: 1 !important; transform: none !important; transition: none; }
       .screenshots img { clip-path: none !important; }
@@ -452,6 +732,12 @@
 
 <!-- CURSOR SPOTLIGHT -->
 <div id="cursor-glow"></div>
+
+<!-- LIGHTBOX -->
+<div id="lightbox">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <img src="" alt="" />
+</div>
 
 <!-- NAV -->
 <nav id="nav">
@@ -482,11 +768,16 @@
 
 <!-- ABOUT -->
 <section id="about">
-  <div class="container reveal">
+  <div class="container wide reveal">
     <p class="section-label">The Problem</p>
     <h2>Institutional research existed. Access didn't.</h2>
-    <p class="lead">India has over 100 million demat accounts. But high-quality equity research — detailed, analyst-backed, conviction-rated — was locked behind 30-page PDFs, institutional language, and English-only delivery. The gap was never the research. It was accessibility.</p>
-    <p class="lead">The MO Research Suite closes that gap for the first time inside a regulated brokerage context — turning static reports into conversational, real-time intelligence available to every retail investor.</p>
+    <div class="problem-flow">
+      <p class="lead">India has over <strong>100 million demat accounts</strong>. But high-quality equity research (detailed, analyst-backed, conviction-rated) was locked behind 30-page PDFs, institutional language, and English-only delivery.</p>
+      <p class="problem-punch">The gap was never the research. It was <span class="hl">accessibility</span>.</p>
+      <div class="solution-box">
+        <p>The MO Research Suite closes that gap for the first time inside a regulated brokerage context, turning static reports into <strong>conversational, real-time intelligence</strong> available to every retail investor.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -494,7 +785,7 @@
 
 <!-- PRODUCT 1: RESEARCH HOME -->
 <section id="products" class="alt">
-  <div class="container">
+  <div class="container wide">
     <div class="two-col reveal">
       <div>
         <p class="section-label">Product 1</p>
@@ -508,8 +799,10 @@
           <li>Covers equity, derivatives, and commodities</li>
         </ul>
       </div>
-      <div class="phone-wrap">
-        <img src="images/slide1.jpg" alt="Research Home screen" loading="lazy" />
+      <div class="phone-trio">
+        <img src="images/1.jpeg" class="ph ph-left" alt="Research Home — market analysis" loading="lazy" />
+        <img src="images/2.jpeg" class="ph ph-right" alt="Research Home — research feed" loading="lazy" />
+        <img src="images/slide1.jpg" class="ph ph-center" alt="Research Home screen" loading="lazy" />
       </div>
     </div>
   </div>
@@ -517,7 +810,7 @@
 
 <!-- PRODUCT 2: RESEARCH ASSISTANT -->
 <section>
-  <div class="container">
+  <div class="container wide">
     <div class="two-col reverse reveal">
       <div>
         <p class="section-label">Product 2</p>
@@ -532,8 +825,9 @@
           <li>Median response time: 10 seconds</li>
         </ul>
       </div>
-      <div class="phone-wrap">
-        <img src="images/RA-3.png" alt="MO Research Assistant screen" loading="lazy" />
+      <div class="phone-duo">
+        <img src="images/RA-2.png" class="ph ph-back" alt="MO Research Assistant results" loading="lazy" />
+        <img src="images/RA-3.png" class="ph ph-front" alt="MO Research Assistant screen" loading="lazy" />
       </div>
     </div>
   </div>
@@ -541,7 +835,7 @@
 
 <!-- SCREENSHOTS -->
 <section class="alt">
-  <div class="container reveal">
+  <div class="container wide reveal">
     <p class="section-label">Product in Action</p>
     <h2>From question to investment view — in 10 seconds</h2>
     <p class="lead">A user asks "view on HDFC Bank" in plain language. The assistant orchestrates across live data, analyst research, and consensus intelligence — returning a structured investment view, cited and validated.</p>
@@ -555,7 +849,7 @@
 
 <!-- VIDEO -->
 <section>
-  <div class="container reveal">
+  <div class="container wide reveal">
     <p class="section-label">Demo</p>
     <h2>See it in action</h2>
     <p class="lead">Watch the MO Research Suite deliver live investment intelligence inside the RIISE trading app.</p>
@@ -575,7 +869,7 @@
 
 <!-- METRICS -->
 <section id="metrics">
-  <div class="container reveal">
+  <div class="container wide reveal">
     <p class="section-label">Performance Metrics</p>
     <h2>Benchmarks & Outcomes</h2>
     <p class="lead">All figures reflect monthly run-rate. Product live since January 2026. Continuously monitored via live observability dashboard — evaluated by the Business Strategy team and presented at executive-level leadership reviews.</p>
@@ -614,22 +908,22 @@
 
 <!-- TESTIMONIALS -->
 <section class="alt">
-  <div class="container reveal">
+  <div class="container wide reveal">
     <p class="section-label">Franchise Testimonials</p>
     <h2>Validated by those who know research best</h2>
     <p class="lead">MO's top-producing franchise partners — experienced advisors with years of institutional research access — are among the product's strongest advocates.</p>
-    <div class="validation-grid" data-stagger>
-      <div class="val-card">
-        <h4>Gandhi Investmall, Godhra</h4>
-        <p>"Research Assistant has significantly improved the way we engage with our clients. Instead of spending hours gathering reports and market insights, our team is now able to provide quicker, more confident, and research-backed guidance to investors."</p>
+    <div class="quote-grid" data-stagger>
+      <div class="quote-card">
+        <p>Research Assistant has significantly improved the way we engage with our clients. Instead of spending hours gathering reports and market insights, our team is now able to provide quicker, more confident, and research-backed guidance to investors.</p>
+        <div class="firm">Gandhi Investmall, Godhra</div>
       </div>
-      <div class="val-card">
-        <h4>Mas Consultancy, Mehsana</h4>
-        <p>"The platform has made financial research far more accessible for both our advisors and clients. Whether it is stock comparisons, sector outlook, or investment recommendations, the responses are detailed, accurate, and easy to understand."</p>
+      <div class="quote-card">
+        <p>The platform has made financial research far more accessible for both our advisors and clients. Whether it is stock comparisons, sector outlook, or investment recommendations, the responses are detailed, accurate, and easy to understand.</p>
+        <div class="firm">Mas Consultancy, Mehsana</div>
       </div>
-      <div class="val-card">
-        <h4>KRM Securities, Dombivali</h4>
-        <p>"Research Assistant has become a valuable support system for our day-to-day advisory activities. The ability to instantly access research reports, technical insights, news, and company analysis has helped our team respond faster and make discussions with clients more meaningful."</p>
+      <div class="quote-card">
+        <p>Research Assistant has become a valuable support system for our day-to-day advisory activities. The ability to instantly access research reports, technical insights, news, and company analysis has helped our team respond faster and make discussions with clients more meaningful.</p>
+        <div class="firm">KRM Securities, Dombivali</div>
       </div>
     </div>
   </div>
@@ -637,24 +931,24 @@
 
 <!-- VALIDATION -->
 <section>
-  <div class="container reveal">
+  <div class="container wide reveal">
     <p class="section-label">Independent Validation</p>
     <h2>Governance & Evidence</h2>
     <p class="lead">A three-layer governance chain ensures every number cited is organisationally validated — not self-reported by the product team.</p>
-    <div class="validation-grid" data-stagger>
-      <div class="val-card">
+    <div class="gov-grid" data-stagger>
+      <div class="gov-card">
         <h4>Business Strategy Team</h4>
         <p>Independently evaluates all KPIs — order flow attribution, accuracy scores, engagement metrics — providing formal sign-off on reported outcomes.</p>
       </div>
-      <div class="val-card">
+      <div class="gov-card">
         <h4>Equity Research Team</h4>
         <p>Continuously monitors response accuracy against published analyst research, price targets, and sector theses. The 90%+ figure reflects ongoing review, not a one-time test.</p>
       </div>
-      <div class="val-card">
+      <div class="gov-card">
         <h4>Executive Leadership Review</h4>
         <p>Product KPIs are presented at executive-level leadership calls — the highest form of internal accountability in a regulated financial institution.</p>
       </div>
-      <div class="val-card">
+      <div class="gov-card">
         <h4>Franchise Testimonials</h4>
         <p>Top-producing MO franchises — highest-revenue distribution partners — have provided direct testimonials on client engagement impact.</p>
       </div>
@@ -664,19 +958,54 @@
 
 <!-- COMPLIANCE -->
 <section class="alt">
-  <div class="container reveal">
+  <div class="container wide reveal">
     <p class="section-label">Compliance & Architecture</p>
     <h2>Built for a regulated market</h2>
     <p class="lead">Compliance is not a constraint retrofitted at the end — it is a design input from day one.</p>
-    <ul class="feature-list" style="margin-top:1.5rem; max-width:680px;">
-      <li>SEBI-compliant framework — responses grounded in published analyst research, not independent AI inference</li>
-      <li>DPDPA compliant by architecture — no client-specific data processed at the AI layer</li>
-      <li>On-premise deployment of client-facing models — no user data transmitted externally</li>
-      <li>Dual-model evaluation — an independent large-scale model evaluates every generation before delivery</li>
-      <li>Live guardrail layer validates numerical accuracy and analyst position alignment on every response</li>
-      <li>Citations provided on every response — fully traceable to source analyst report</li>
-      <li>Full observability stack with live monitoring dashboard across all agent decisions</li>
-    </ul>
+    <div class="accordion" data-stagger>
+      <div class="acc-item open">
+        <button class="acc-head" aria-expanded="true">
+          <span class="acc-num">01</span><span class="acc-title">SEBI-compliant framework</span><span class="acc-icon"></span>
+        </button>
+        <div class="acc-panel"><div class="acc-inner"><p>Responses are grounded in published analyst research, not independent AI inference.</p></div></div>
+      </div>
+      <div class="acc-item open">
+        <button class="acc-head" aria-expanded="true">
+          <span class="acc-num">02</span><span class="acc-title">DPDPA compliant by architecture</span><span class="acc-icon"></span>
+        </button>
+        <div class="acc-panel"><div class="acc-inner"><p>No client-specific data is processed at the AI layer.</p></div></div>
+      </div>
+      <div class="acc-item open">
+        <button class="acc-head" aria-expanded="true">
+          <span class="acc-num">03</span><span class="acc-title">On-premise model deployment</span><span class="acc-icon"></span>
+        </button>
+        <div class="acc-panel"><div class="acc-inner"><p>Client-facing models run on-premise — no user data is transmitted externally.</p></div></div>
+      </div>
+      <div class="acc-item open">
+        <button class="acc-head" aria-expanded="true">
+          <span class="acc-num">04</span><span class="acc-title">Dual-model evaluation</span><span class="acc-icon"></span>
+        </button>
+        <div class="acc-panel"><div class="acc-inner"><p>An independent large-scale model evaluates every generation before delivery.</p></div></div>
+      </div>
+      <div class="acc-item open">
+        <button class="acc-head" aria-expanded="true">
+          <span class="acc-num">05</span><span class="acc-title">Live guardrail layer</span><span class="acc-icon"></span>
+        </button>
+        <div class="acc-panel"><div class="acc-inner"><p>Validates numerical accuracy and analyst-position alignment on every response.</p></div></div>
+      </div>
+      <div class="acc-item open">
+        <button class="acc-head" aria-expanded="true">
+          <span class="acc-num">06</span><span class="acc-title">Citations on every response</span><span class="acc-icon"></span>
+        </button>
+        <div class="acc-panel"><div class="acc-inner"><p>Every response is fully traceable to its source analyst report.</p></div></div>
+      </div>
+      <div class="acc-item open">
+        <button class="acc-head" aria-expanded="true">
+          <span class="acc-num">07</span><span class="acc-title">Full observability stack</span><span class="acc-icon"></span>
+        </button>
+        <div class="acc-panel"><div class="acc-inner"><p>A live monitoring dashboard tracks all agent decisions across the system.</p></div></div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -866,6 +1195,32 @@
     });
   }, { threshold: 0.5 });
   document.querySelectorAll('[data-count]').forEach((el) => countIO.observe(el));
+
+  // Accordion (compliance)
+  document.querySelectorAll('.acc-item .acc-head').forEach((head) => {
+    head.addEventListener('click', () => {
+      const item = head.closest('.acc-item');
+      const isOpen = item.classList.toggle('open');
+      head.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    });
+  });
+
+  // Lightbox — click any screenshot to zoom
+  const lb = document.getElementById('lightbox');
+  if (lb) {
+    const lbImg = lb.querySelector('img');
+    const closeLb = () => { lb.classList.remove('open'); document.body.style.overflow = ''; };
+    document.querySelectorAll('.screenshots img').forEach((img) => {
+      img.addEventListener('click', () => {
+        lbImg.src = img.currentSrc || img.src;
+        lbImg.alt = img.alt;
+        lb.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      });
+    });
+    lb.addEventListener('click', closeLb);
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLb(); });
+  }
 </script>
 
 </body>
