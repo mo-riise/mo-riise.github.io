@@ -79,7 +79,7 @@
       transition: width 0.1s linear;
     }
 
-    /* NAV — glassmorphic */
+    /* NAV — fully transparent over the MO Research Suite splash */
     nav {
       display: flex;
       justify-content: space-between;
@@ -88,13 +88,14 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(255,255,255,0.72);
-      backdrop-filter: saturate(180%) blur(16px);
-      -webkit-backdrop-filter: saturate(180%) blur(16px);
-      border-bottom: 1px solid rgba(229,231,235,0.7);
-      transition: padding 0.3s var(--ease), box-shadow 0.3s var(--ease);
+      background: transparent;
+      backdrop-filter: none;
+      -webkit-backdrop-filter: none;
+      border-bottom: none;
+      box-shadow: none;
+      transition: padding 0.3s var(--ease);
     }
-    nav.scrolled { padding: 0.65rem 2rem; box-shadow: var(--shadow-sm); }
+    nav.scrolled { padding: 0.65rem 2rem; }
     nav .logo { font-family: 'Fraunces', serif; font-size: 1.05rem; color: var(--purple); font-weight: 700; letter-spacing: -0.01em; }
     nav .badge {
       position: relative;
@@ -113,6 +114,108 @@
       0%   { opacity: 0.8; transform: scale(1); }
       70%  { opacity: 0; transform: scale(1.35); }
       100% { opacity: 0; transform: scale(1.35); }
+    }
+
+    /* VIDEO SPLASH — fullscreen video hero (Festava-style) */
+    .video-splash {
+      position: relative;
+      width: 100%;
+      min-height: 100svh;
+      overflow: hidden;
+      background: #000;
+    }
+    .video-splash .bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      z-index: 0;
+      background: #000;
+    }
+    /* readability vignette so the glass card pops on bright frames */
+    .video-splash::after {
+      content: "";
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background:
+        radial-gradient(60% 60% at 50% 50%, transparent 0%, rgba(0,0,0,0.45) 75%, rgba(0,0,0,0.7) 100%),
+        linear-gradient(180deg, rgba(0,0,0,0.25) 0%, transparent 25%, transparent 70%, rgba(0,0,0,0.55) 100%);
+    }
+    /* top-anchored, fully transparent header over the video */
+    .video-splash .splash-top {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 2;
+      padding: clamp(1.25rem, 3vw, 2rem) clamp(1.25rem, 4vw, 2.5rem) 1.5rem;
+      text-align: center;
+      color: #fff;
+      background: transparent;
+      pointer-events: none;
+    }
+    .video-splash .brand {
+      display: block;
+      font-family: 'Fraunces', serif;
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: #fff;
+      margin-bottom: 0.85rem;
+      text-shadow: 0 1px 14px rgba(0,0,0,0.55);
+    }
+    .video-splash h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.75rem, 4.5vw, 3rem);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.02em;
+      margin: 0 auto 0.6rem;
+      max-width: 900px;
+      color: rgba(255,255,255,0.45);
+      text-shadow: 0 2px 18px rgba(0,0,0,0.4);
+    }
+    .video-splash p.tag {
+      font-size: clamp(0.95rem, 1.5vw, 1.05rem);
+      color: rgba(255,255,255,0.92);
+      max-width: 640px;
+      margin: 0 auto;
+      text-shadow: 0 1px 12px rgba(0,0,0,0.5);
+    }
+    .video-splash .links { display: flex; justify-content: center; gap: 0.85rem; flex-wrap: wrap; }
+    .video-splash .links a {
+      position: relative; overflow: hidden;
+      padding: 0.72rem 1.55rem;
+      border-radius: 8px;
+      font-size: 0.92rem; font-weight: 600;
+      text-decoration: none;
+      transition: transform 0.25s var(--ease), box-shadow 0.25s var(--ease), background 0.25s var(--ease);
+    }
+    .video-splash .btn-primary { background: linear-gradient(135deg, var(--purple), var(--purple-light)); color: #fff; box-shadow: 0 8px 20px rgba(91,33,182,0.35); }
+    .video-splash .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(91,33,182,0.45); }
+    .video-splash .btn-outline { border: 1.5px solid rgba(255,255,255,0.55); color: #fff; background: rgba(255,255,255,0.08); }
+    .video-splash .btn-outline:hover { transform: translateY(-3px); border-color: #fff; box-shadow: 0 0 24px rgba(255,255,255,0.25); }
+    /* scroll cue */
+    .video-splash .scroll-cue {
+      position: absolute; left: 50%; bottom: 1.5rem;
+      transform: translateX(-50%);
+      z-index: 2;
+      font-size: 0.7rem; letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.75);
+      display: inline-flex; flex-direction: column; align-items: center; gap: 0.45rem;
+      pointer-events: none;
+    }
+    .video-splash .scroll-cue::after {
+      content: ""; width: 1px; height: 26px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.75), transparent);
+      animation: cueDrop 1.8s ease-in-out infinite;
+    }
+    @keyframes cueDrop {
+      0%   { transform: translateY(-6px); opacity: 0; }
+      40%  { opacity: 1; }
+      100% { transform: translateY(8px); opacity: 0; }
+    }
+    @media (max-width: 600px) {
+      .video-splash .scroll-cue { display: none; }
     }
 
     /* HERO — futuristic AI section (full-bleed dark) */
@@ -733,10 +836,20 @@
 <!-- CURSOR SPOTLIGHT -->
 <div id="cursor-glow"></div>
 
-<!-- NAV -->
-<nav id="nav">
-  <span class="logo">MO Research Suite</span>
-</nav>
+<!-- VIDEO SPLASH (fullscreen) -->
+<section class="video-splash" aria-label="MO Research Suite intro video">
+  <video
+    class="bg-video"
+    autoplay muted loop playsinline controls preload="metadata"
+    poster="images/preview.webp">
+    <source src="videos/sarthak_input.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+  <header class="splash-top">
+    <h1>AI-Powered Investment Intelligence</h1>
+  </header>
+  <span class="scroll-cue" aria-hidden="true">Scroll</span>
+</section>
 
 <!-- HERO -->
 <section class="hero-section">
@@ -1014,7 +1127,7 @@
   const progress = document.getElementById('progress');
   const phones = [...document.querySelectorAll('.phone-wrap')];
   const onScroll = () => {
-    nav.classList.toggle('scrolled', window.scrollY > 8);
+    if (nav) nav.classList.toggle('scrolled', window.scrollY > 8);
     const h = document.documentElement;
     const max = h.scrollHeight - h.clientHeight;
     progress.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
