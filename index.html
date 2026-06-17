@@ -793,6 +793,35 @@
 
     hr { border: none; border-top: 1px solid var(--border); }
 
+    /* Glowing brand divider between full-bleed dark sections */
+    .section-divider {
+      position: relative;
+      height: 1px;
+      width: 100%;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(124,58,237,0.0) 8%,
+        rgba(167,139,250,0.55) 35%,
+        rgba(124,58,237,0.85) 50%,
+        rgba(167,139,250,0.55) 65%,
+        rgba(124,58,237,0.0) 92%,
+        transparent 100%);
+      box-shadow: 0 0 24px rgba(124,58,237,0.45);
+    }
+    .section-divider::before,
+    .section-divider::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--purple-light);
+      transform: translateY(-50%);
+      box-shadow: 0 0 14px rgba(124,58,237,0.85);
+    }
+    .section-divider::before { left: calc(50% - 80px); }
+    .section-divider::after  { left: calc(50% + 74px); }
+
     /* FOOTER */
     footer {
       text-align: center; padding: 3.5rem 2rem;
@@ -839,8 +868,9 @@
 <!-- VIDEO SPLASH (fullscreen) -->
 <section class="video-splash" aria-label="MO Research Suite intro video">
   <video
+    id="splashVideo"
     class="bg-video"
-    autoplay muted loop playsinline controls preload="metadata"
+    autoplay muted loop playsinline controls preload="auto"
     poster="images/preview.webp">
     <source src="videos/sarthak_input.mp4" type="video/mp4" />
     Your browser does not support the video tag.
@@ -850,6 +880,9 @@
   </header>
   <span class="scroll-cue" aria-hidden="true">Scroll</span>
 </section>
+
+<!-- SECTION DIVIDER -->
+<div class="section-divider" role="separator" aria-hidden="true"></div>
 
 <!-- HERO -->
 <section class="hero-section">
@@ -1121,6 +1154,25 @@
 
 <script>
   const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Splash video: autoplay muted (browsers require it), then unmute on first user interaction.
+  (() => {
+    const v = document.getElementById('splashVideo');
+    if (!v) return;
+    const tryPlay = () => { const p = v.play(); if (p && p.catch) p.catch(() => {}); };
+    tryPlay();
+    const unmute = () => {
+      v.muted = false;
+      v.volume = 1;
+      tryPlay();
+      ['pointerdown','keydown','touchstart','wheel','scroll'].forEach(e =>
+        window.removeEventListener(e, unmute, { capture: true })
+      );
+    };
+    ['pointerdown','keydown','touchstart','wheel','scroll'].forEach(e =>
+      window.addEventListener(e, unmute, { once: true, capture: true, passive: true })
+    );
+  })();
 
   // Sticky nav shadow + scroll progress bar + phone parallax
   const nav = document.getElementById('nav');
